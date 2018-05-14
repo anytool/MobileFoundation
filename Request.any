@@ -27,12 +27,14 @@ module.exports  = function(d, t) {
         var inst = data.instances[data.instances.length - 1];
         // make sure there is at least one instance
         if (inst && (d.__props || {}).alias) inst.__data[d.__props.alias] = body;
-        // callback
-        t[status] && t[status]();
         // get views
         var views = workspace.views[inst.id].views || [], view = views[views.length - 1];
         // reload view
-        view && view.setState({});
+        view ? view.setState({}, function() {
+            // callback
+            t[status] && t[status]();
+        // callback directly
+        }) : t[status] && t[status]();
     }
     // make request
     Network(g, {

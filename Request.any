@@ -5,7 +5,7 @@ var Network     = require(10019);
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
     var g = {
-        url     : d.__props.url || "",
+        url     : workspace.eval(d, d.__props.url || ""),
         method  : {
             READ    : "GET",
             CREATE  : "POST",

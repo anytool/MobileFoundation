@@ -5,5 +5,5 @@ var evaluate    = require(10023);
 module.exports  = function(a, b) {
     var data = workspace.data(a).data;
     var props = a.__props || {};
-    __rN.AlertIOS.alert(evaluate(props.altTitle || ""), evaluate(props.altContent || ""));
+    __rN.AlertIOS.alert(evaluate(props.altTitle || "", data), evaluate(props.altContent || "", data));
 };

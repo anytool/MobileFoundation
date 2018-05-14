@@ -4,6 +4,7 @@ var evaluate    = require(10023);
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
     var data = workspace.data(a).data;
+    console.log("[Alert] check data: ", data);
     var props = a.__props || {};
     __rN.AlertIOS.alert(evaluate(props.altTitle || "", data), evaluate(props.altContent || "", data));
 };

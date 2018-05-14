@@ -4,5 +4,6 @@ var evaluate    = require(10023);
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
     var data = workspace.data(a).data;
-    __rN.AlertIOS.alert("title", evaluate("1 + 1"));
+    var props = a.__props || {};
+    __rN.AlertIOS.alert(evaluate(props.altTitle || ""), evaluate(props.altContent || ""));
 };

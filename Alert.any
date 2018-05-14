@@ -2,6 +2,8 @@ var workspace   = require("ANYWorkspace");
 var __rN        = require("ReactNative");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
+    // get instance properties
     var props = a.__props || {}, e = workspace.eval;
-    __rN.AlertIOS.alert(e(a, props.altTitle || ""), e(props.altContent || ""));
+    // for ios
+    __rN.AlertIOS.alert(e(a, props.altTitle || ""), e(a, props.altContent || ""));
 };

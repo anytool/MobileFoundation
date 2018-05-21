@@ -21,16 +21,22 @@ module.exports  = function(d, t) {
     };
     console.log("[request] send request: ", g);
     var responseHandler = function(status, body) {
-        // get data info
-        var data = workspace.data(d);
-        // save data to last instance
-        var inst = data.instances[data.instances.length - 1];
+        // get closest view
+        var view = null, parent = d.__caller;
+        // find view
+        for (!view && parent) {
+            view = workspace.views[parent.__id];
+            parent = parent.__caller;
+        }
         // make sure there is at least one instance
-        if (inst && (d.__props || {}).alias) inst.__data[d.__props.alias] = body;
-        // get views
-        var views = workspace.views[inst.id].views || [], view = views[views.length - 1];
+        if (view && (d.__props || {}).alias) {
+            // setup data container
+            workspace.views[view.id].data = workspace.views[view.id].data || {};
+            // save data
+            workspace.views[view.id].data[d.__props.alias] = body;
+        }
         // reload view
-        view ? view.setState({}, function() {
+        (view || {}).dom ? view.dom.setState({}, function() {
             // callback
             t[status] && t[status]();
         // callback directly

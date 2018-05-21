@@ -30,6 +30,7 @@ module.exports  = function(d, t) {
             view = workspace.views[parent.__id];
             parent = parent.__caller;
         }
+        console.log("[request] check view: ", typeof view);
         // make sure there is at least one instance
         if (view && (d.__props || {}).alias) {
             // setup data container
@@ -39,7 +40,6 @@ module.exports  = function(d, t) {
         }
         // reload view
         (view || {}).dom ? view.dom.setState({}, function() {
-            console.log("[request] checking here: ", status, typeof t[status]);
             // callback
             t[status] && t[status]();
         // callback directly

@@ -21,9 +21,12 @@ module.exports  = function(d, t) {
     };
     var responseHandler = function(status, body) {
         // get closest view
-        var view = null, parent = d.__caller;
+        var view = null;
+        // get parent
+        var parent = d.__caller;
         // find view
         for (!view && parent) {
+            // get view
             view = workspace.views[parent.__id];
             parent = parent.__caller;
         }
@@ -40,7 +43,7 @@ module.exports  = function(d, t) {
             t[status] && t[status]();
         // callback directly
         }) : t[status] && t[status]();
-    }
+    };
     // make request
     Network(g, {
         succeeded   : function(res) { responseHandler('succeeded', res) },

@@ -39,7 +39,7 @@ module.exports  = function(d, t) {
         }
         // reload view
         (view || {}).dom ? view.dom.setState({}, function() {
-            console.log("[request] checking here");
+            console.log("[request] checking here: ", status);
             // callback
             t[status] && t[status]();
         // callback directly

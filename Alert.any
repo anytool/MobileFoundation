@@ -4,9 +4,7 @@ var __rN        = require("ReactNative");
 module.exports  = function(a, b) {
     // get instance properties
     var props = a.__props || {}, e = a.data;
-    console.log("[alert] debug: ");
-    var title = e(props.altTitle || "");
-    var content = e(props.altContent || "");
-    console.log("[alert] debug 2: ", title, content);
+    var title = a.data(props.altTitle || "");
+    var content = a.data(props.altContent || "");
     __rN.AlertIOS.alert(title, content || (title ? "" : " "));
 };

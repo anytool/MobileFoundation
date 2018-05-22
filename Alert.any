@@ -3,7 +3,9 @@ var __rN        = require("ReactNative");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
     // get instance properties
-    var props = a.__props || {}, e = workspace.eval;
+    var props = a.__props || {}, e = a.data;
+    var title = e(props.altTitle || "");
+    var content = e(props.altContent || "");
     // for ios
-    __rN.AlertIOS.alert(e(a, props.altTitle || ""), e(a, props.altContent || ""));
+    __rN.AlertIOS.alert(title, content || (title ? "" : " "));
 };

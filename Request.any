@@ -20,11 +20,12 @@ module.exports  = function(d, t) {
         }
     };
     var responseHandler = function(status, body) {
+        console.log("[request] check response handler: ", status);
         // save data
         d.data(d.__props.alias, body);
         // get closest view
         var view = d.dom();
-        console.log("[request] check response handler: ", status);
+        console.log("[request] check response handler 222222: ", status);
         // reload view
         view ? view.setState({}, function() {
             // callback

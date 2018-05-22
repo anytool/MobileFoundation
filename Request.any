@@ -24,7 +24,6 @@ module.exports  = function(d, t) {
         d.data(d.__props.alias, body);
         // get closest view
         var view = d.dom();
-        console.log("[request] check dom: ", d.data());
         // reload view
         view ? view.setState({}, function() {
             // callback

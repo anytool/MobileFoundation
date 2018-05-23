@@ -6,5 +6,6 @@ module.exports  = function(a, b) {
     var props = a.__props || {}, e = a.data;
     var title = a.data(props.altTitle || "");
     var content = a.data(props.altContent || "");
+    console.log("[debug] alert: ", title, content);
     __rN.AlertIOS.alert(title, content || (title ? "" : " "));
 };

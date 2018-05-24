@@ -1,13 +1,14 @@
 var workspace   = require("ANYWorkspace");
 var __rN        = require("ReactNative");
+var qs          = require("QueryString");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
-    // get id
-    var id = a.__props.rActId || "";
+    // get id and parse props
+    var id = a.__props.rActId || "", props = qs.parse(a.__props.rProps);
     // node exists
     if ((workspace.aliases[id] || []).length) {
         // get exactly id
         id = workspace.aliases[id][workspace.aliases[id].length - 1];
-        console.log("[debug] reload action: ", workspace.tree[id].class, a.__props.rProps);
+        console.log("[debug] reload action: ", workspace.tree[id].class, props);
     }
 };

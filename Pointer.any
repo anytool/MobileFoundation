@@ -30,7 +30,7 @@ module.exports  = function(a, b) {
         // reload action
         } else {
             // get class
-            var cls = workspace.tree[id].class;
+            var cls = workspace.tree[id].class.name;
             // get instance
             var instance = workspace.tree[id].instance;
             // get parent id
@@ -42,7 +42,7 @@ module.exports  = function(a, b) {
             // delete child nodes
             console.log("[debug] reload class: ", id, viewId, workspace.tree[id].class, props);
             // reload
-            new cls(instance.__caller, props);
+            eval("new " + cls + "(instance.__caller," + JSON.parse(props) + ")");
             // callback
             b && b();
         }

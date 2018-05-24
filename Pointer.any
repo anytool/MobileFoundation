@@ -28,6 +28,8 @@ module.exports  = function(a, b) {
             });
         // reload action
         } else {
+            // get class
+            var cls = workspace.tree[id].class;
             // get instance
             var instance = workspace.tree[id].instance;
             // get parent id
@@ -39,7 +41,7 @@ module.exports  = function(a, b) {
             // delete child nodes
             console.log("[debug] delete childs: ", workspace.tree[id].childs);
             // reload
-            console.log("[debug] new action: ", typeof workspace.tree[id].class(instance.__caller, qs.parse(props.join("&"))));
+            new cls(instance.__caller, qs.parse(props.join("&")));
             // callback
             b && b();
         }

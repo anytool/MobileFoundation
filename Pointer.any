@@ -77,9 +77,10 @@ module.exports  = function(a, b) {
             }
             // delete from alias container
             delete workspace.aliases[alias][id];
-            console.log("[debug] props: ", oriProps, props);
+            // append new props to original prop data container
+            for (var key in props) oriProps[key] = props[key];
             // reload
-            new (Function.prototype.bind.call(cls, caller, props));
+            new (Function.prototype.bind.call(cls, caller, oriProps));
             // callback
             b && b();
         }

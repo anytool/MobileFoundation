@@ -62,7 +62,7 @@ module.exports  = function(a, b) {
                     delete workspace.tree[ids[i][1]];
                 }
                 // get parent id
-                parentId = workspace.views[ids[i][1]].parent;
+                parentId = (workspace.views[ids[i][1]] || {}).parent;
                 // parent view exists
                 if (parentId) {
                     // get child index
@@ -73,7 +73,6 @@ module.exports  = function(a, b) {
                     delete workspace.views[ids[i][1]];
                 }
             }
-            console.log("[debug] delete: ", ids);
             // reload
             new (Function.prototype.bind.call(cls, caller, props));
             // callback

@@ -4,7 +4,7 @@ var qs          = require("QueryString");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
     // get id and parse props
-    var id = a.__props.rActId || "", props = (a.__props.rProps || "").split("&").filter(function(n){return n});
+    var alias = a.__props.rActId || "", props = (a.__props.rProps || "").split("&").filter(function(n){return n});
     // process props
     for (var i in props) {
         var prop = props[i].split("=");
@@ -13,9 +13,9 @@ module.exports  = function(a, b) {
     }
     props = props.length ? qs.parse(props.join("&")) : {};
     // node exists
-    if ((workspace.aliases[id] || []).length) {
+    if ((workspace.aliases[alias] || []).length) {
         // get exactly id
-        id = workspace.aliases[id][workspace.aliases[id].length - 1];
+        var id = workspace.aliases[alias][workspace.aliases[alias].length - 1];
         // get closest view
         var viewId = workspace.views[id] ? id : workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
         // reload view
@@ -73,6 +73,8 @@ module.exports  = function(a, b) {
                     delete workspace.views[ids[i][1]];
                 }
             }
+            // delete from alias container
+            delete workspace.aliases[alias][id];
             // reload
             new (Function.prototype.bind.call(cls, caller, props));
             // callback

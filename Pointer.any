@@ -39,7 +39,7 @@ module.exports  = function(a, b) {
             // delete instance from parent
             if (idx >= 0) workspace.tree[parentId].childs[instance.__trigger].splice(idx, 1);
             // delete child nodes
-            console.log("[debug] delete childs: ", workspace.tree[id].childs, cls);
+            console.log("[debug] reload: ", cls, workspace.tree[id].childs);
             // reload
             new cls(instance.__caller, qs.parse(props.join("&")));
             // callback

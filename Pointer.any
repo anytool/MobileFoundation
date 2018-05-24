@@ -32,31 +32,33 @@ module.exports  = function(a, b) {
             // get instance
             var instance = workspace.tree[id].instance;
             // get ids that need to clear
-            var ids = [], getChildIds = function(currentId) {
-                ids.unshift(currentId);
-                if (workspace.tree[currentId]) {
-                    for (var trigger in workspace.tree[currentId].childs) {
-                         for (var childIdx in workspace.tree[currentId].childs) {
-                             getChildIds(workspace.tree[currentId].childs[childIdx]);
+            var ids = [], getChildIds = function(nId, trigger) {
+                ids.unshift([trigger, nId]);
+                if (workspace.tree[nId]) {
+                    for (var t in workspace.tree[nId].childs) {
+                         for (var cIdx in workspace.tree[nId].childs[t]) {
+                             getChildIds(workspace.tree[nId].childs[t][cIdx], t);
                          }
                     }
                 }
             };
-            getChildIds(id);
+            getChildIds(id, instance.__trigger);
             // delete child nodes
             for (var i in ids) {
-                
+                // get parent id
+                var parentId = workspace.tree[ids[i][1]].paths.node[workspace.tree[ids[i][1]].paths.node.length - 1];
+                // get child index
+                var idx = (((workspace.tree[parentId] || {}).childs || {})[ids[i][0]] || []).indexOf(ids[i][1]);
+                // delete instance from parent
+                if (idx >= 0) workspace.tree[parentId].childs[ids[i][0]].splice(idx, 1);
             }
             console.log("[debug] delete: ", ids);
 
 
 
-            // get parent id
-            var parentId = workspace.tree[id].paths.node[workspace.tree[id].paths.node.length - 1];
-            // get child index
-            var idx = (((workspace.tree[parentId] || {}).childs || {})[instance.__trigger] || []).indexOf(id);
-            // delete instance from parent
-            if (idx >= 0) workspace.tree[parentId].childs[instance.__trigger].splice(idx, 1);
+            
+            
+            
 
 
             // reload

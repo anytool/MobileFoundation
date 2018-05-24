@@ -4,7 +4,13 @@ var qs          = require("QueryString");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
     // get id and parse props
-    var id = a.__props.rActId || "", props = qs.parse(a.__props.rProps);
+    var id = a.__props.rActId || "", props = (a.__props.rProps || "").split("&").filter(function(n){return n});
+    // process props
+    for (var i in props) {
+        var prop = props[i].split("=");
+        prop[1] = a.data(prop[1]);
+        props[i] = prop.join("=");
+    }
     // node exists
     if ((workspace.aliases[id] || []).length) {
         // get exactly id
@@ -16,7 +22,7 @@ module.exports  = function(a, b) {
             // get view
             var view = workspace.views[viewId].doms.instances[workspace.views[viewId].doms.current];
             // update view
-            view.setState && view.setState(props, function() {
+            view.setState && view.setState(qs.parse(props.join("&")), function() {
                 this.active();
                 b && b();
             });

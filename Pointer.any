@@ -32,7 +32,7 @@ module.exports  = function(a, b) {
             // get instance
             var instance = workspace.tree[id].instance;
             // get ids that need to clear
-            var ids = [], getChilds = getChildIds(currentId) {
+            var ids = [], getChilds = function(currentId) {
                 if (workspace.tree[currentId]) {
                     for (var trigger in workspace.tree[currentId].childs) {
                          for (var childIdx in workspace.tree[currentId].childs) {

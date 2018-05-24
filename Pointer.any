@@ -31,14 +31,32 @@ module.exports  = function(a, b) {
         } else {
             // get instance
             var instance = workspace.tree[id].instance;
+            // get ids that need to clear
+            var ids = [], getChilds = getChildIds(currentId) {
+                if (workspace.tree[currentId]) {
+                    for (var trigger in workspace.tree[currentId].childs) {
+                         for (var childIdx in workspace.tree[currentId].childs) {
+                             getChildIds(workspace.tree[currentId].childs[childIdx]);
+                         }
+                    }
+                }
+            };
+            getChildIds(id);
+            // delete child nodes
+            console.log("[debug] delete: ", ids);
+
+            
+
+
             // get parent id
             var parentId = workspace.tree[id].paths.node[workspace.tree[id].paths.node.length - 1];
             // get child index
             var idx = (((workspace.tree[parentId] || {}).childs || {})[instance.__trigger] || []).indexOf(id);
             // delete instance from parent
             if (idx >= 0) workspace.tree[parentId].childs[instance.__trigger].splice(idx, 1);
-            // delete child nodes
-            console.log("[debug] reload class: ", id, viewId, workspace.tree[id].class, props);
+
+
+
             // reload
             new (Function.prototype.bind.call(workspace.tree[id].class, instance.__caller, props));
             // callback

@@ -32,7 +32,8 @@ module.exports  = function(a, b) {
             // get instance
             var instance = workspace.tree[id].instance;
             // get ids that need to clear
-            var ids = [], getChilds = function(currentId) {
+            var ids = [], getChildIds = function(currentId) {
+                ids.unshift(currentId);
                 if (workspace.tree[currentId]) {
                     for (var trigger in workspace.tree[currentId].childs) {
                          for (var childIdx in workspace.tree[currentId].childs) {
@@ -43,9 +44,11 @@ module.exports  = function(a, b) {
             };
             getChildIds(id);
             // delete child nodes
+            for (var i in ids) {
+                
+            }
             console.log("[debug] delete: ", ids);
 
-            
 
 
             // get parent id
@@ -54,7 +57,6 @@ module.exports  = function(a, b) {
             var idx = (((workspace.tree[parentId] || {}).childs || {})[instance.__trigger] || []).indexOf(id);
             // delete instance from parent
             if (idx >= 0) workspace.tree[parentId].childs[instance.__trigger].splice(idx, 1);
-
 
 
             // reload

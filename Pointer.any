@@ -42,7 +42,7 @@ module.exports  = function(a, b) {
             // delete child nodes
             console.log("[debug] reload class: ", id, viewId, workspace.tree[id].class, props);
             // reload
-            eval("new " + cls + "(instance.__caller," + JSON.parse(props) + ")");
+            eval("new " + cls + "(instance.__caller," + JSON.stringify(props) + ")");
             // callback
             b && b();
         }

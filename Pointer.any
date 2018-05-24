@@ -29,6 +29,17 @@ module.exports  = function(a, b) {
             });
         // reload action
         } else {
+            // get closest view id
+            var closestViewId = workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
+            console.log("[debug] targeted closest view:", workspace.views[closestViewId].type);
+
+
+
+
+
+
+
+
             // get class
             var cls = workspace.tree[id].class;
             // get instance

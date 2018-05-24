@@ -35,6 +35,8 @@ module.exports  = function(a, b) {
             var instance = workspace.tree[id].instance;
             // get caller
             var caller = instance.__caller;
+            // get original props
+            var oriProps = instance.__props;
             // get ids that need to clear
             var ids = [], getChildIds = function(nId, trigger) {
                 ids.unshift([trigger, nId]);
@@ -75,6 +77,7 @@ module.exports  = function(a, b) {
             }
             // delete from alias container
             delete workspace.aliases[alias][id];
+            console.log("[debug] props: ", oriProps, props);
             // reload
             new (Function.prototype.bind.call(cls, caller, props));
             // callback

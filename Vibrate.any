@@ -1,0 +1,6 @@
+var workspace   = require("ANYWorkspace");
+var __rN        = require("ReactNative");
+/* a:instance, b:callbacks */
+module.exports  = function(a, b) {
+    __rN.Vibration.vibrate();
+};

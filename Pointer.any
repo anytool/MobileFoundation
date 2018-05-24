@@ -80,7 +80,7 @@ module.exports  = function(a, b) {
             // append new props to original prop data container
             for (var key in props) oriProps[key] = props[key];
             // reload
-            new (Function.prototype.bind.call(cls, caller, oriProps));
+            new (Function.prototype.bind.call(cls, null, caller, oriProps));
             // callback
             b && b();
         }

@@ -27,7 +27,7 @@ module.exports  = function(d, t) {
         // get closest view id
         //var closestViewId = workspace.tree[d.__caller.__id].paths.view[workspace.tree[d.__caller.__id].paths.view.length - 1];
         //console.log("[debug] check reloaded view:", closestViewId, (workspace.views[closestViewId] || {}).type);
-        console.log("[debug] check reloaded view:", typeof d.__caller, (workspace.tree[(d.__caller || {}).__id] || {}).paths.view);
+        console.log("[debug] check reloaded view:", typeof d.__caller, ((workspace.tree[(d.__caller || {}).__id] || {}).paths || {}).view);
 
 
 

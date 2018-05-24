@@ -1,6 +1,7 @@
 var workspace   = require("ANYWorkspace");
 var __rN        = require("ReactNative");
 var Base64      = require("Base64");
+var qs          = require("QueryString");
 var Network     = require(10019);
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
@@ -20,7 +21,7 @@ module.exports  = function(d, t) {
         }
     };
     // process form data
-    console.log("[debug] form data: ", d.__props.formData);
+    console.log("[debug] form data: ", d.__props.formData, qs.parse(d.__props.formData));
     var responseHandler = function(status, body) {
         // save data
         d.data(d.__props.alias, body);

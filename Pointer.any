@@ -30,7 +30,7 @@ module.exports  = function(a, b) {
         } else {
             // get class
             var cls = workspace.tree[id].class;
-            console.log("[debug] reload class: ", cls);
+            console.log("[debug] reload class: ", cls, qs.parse(props.join("&")));
             // get instance
             var instance = workspace.tree[id].instance;
             // get parent id

@@ -29,17 +29,6 @@ module.exports  = function(a, b) {
             });
         // reload action
         } else {
-            // get closest view id
-            var closestViewId = workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
-            console.log("[debug] targeted closest view:", workspace.views[closestViewId].type);
-
-
-
-
-
-
-
-
             // get class
             var cls = workspace.tree[id].class;
             // get instance
@@ -61,6 +50,20 @@ module.exports  = function(a, b) {
             };
             // get child ids
             getChildIds(id, instance.__trigger);
+
+
+            // get closest view id
+            var closestViewId = workspace.tree[caller.__id].paths.view[workspace.tree[caller.__id].paths.view.length - 1];
+            console.log("[debug] targeted closest view:", workspace.tree[caller.__id].class, workspace.views[closestViewId].type);
+
+
+
+
+
+
+
+
+            
             // delete child nodes
             for (var i in ids) {
                 // get parent id

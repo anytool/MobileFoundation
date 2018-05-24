@@ -5,7 +5,9 @@ module.exports  = function(a, b) {
     // get id
     var id = a.__props.rActId || "";
     // node exists
-    if (workspace.aliases[id]) {
-        console.log("[debug] reload action: ", workspace.aliases[id], a.__props.rProps);
+    if ((workspace.aliases[id] || []).length) {
+        // get exactly id
+        id = workspace.aliases[id][workspace.aliases[id].length - 1];
+        console.log("[debug] reload action: ", workspace.tree[id].class, a.__props.rProps);
     }
 };

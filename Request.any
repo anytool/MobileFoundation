@@ -22,13 +22,14 @@ module.exports  = function(d, t) {
     };
     // process form data
     g.body = /^application\/json$/i.test(g.headers['Content-Type']) ? JSON.stringify(qs.parse(d.__props.formData)) : d.__props.formData;
-    console.log("[debug] check reloaded data:", g);
     // setup response handler
     var responseHandler = function(status, body) {
+        console.log("[debug] check reloaded data:", d.__props.alias, body);
         // save data
         d.data(d.__props.alias, body);
         // get closest view
         var view = d.dom();
+        console.log("[debug] check reloaded view:", typeof view);
         // reload view
         view ? view.setState({}, function() {
             // callback

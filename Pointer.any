@@ -15,7 +15,11 @@ module.exports  = function(a, b) {
         if (id == viewId) {
             // get view
             var view = workspace.views[viewId].doms.instances[workspace.views[viewId].doms.current];
-            console.log("[debug] reload view: ", typeof view, props);
+            // update view
+            view.setState && view.setState(props, function() {
+                this.active();
+                b && b();
+            });
         // reload action
         } else {
             // get instance

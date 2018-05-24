@@ -28,11 +28,20 @@ module.exports  = function(a, b) {
             });
         // reload action
         } else {
-            // get instance
-            var instance = workspace.tree[id].instance;
             // get caller of the instance
-            var caller = instance.__caller;
-            console.log("[debug] reload action: ", workspace.tree[id].class, props);
+            var caller = workspace.tree[id].instance.__caller;
+            // get parent id
+            var parentId = workspace.tree[id].paths.node[workspace.tree[id].paths.node.length - 1];
+            // get child index
+            var idx = ((workspace.tree[parentId] || {}).childs || []).indexOf(id);
+            // delete instance from parent
+            if (idx >= 0) workspace.tree[parentId].childs.splice(idx, 1);
+            // delete child nodes
+            console.log("[debug] delete childs: ", workspace.tree[id].childs);
+            // reload
+            new workspace.tree[id].class(caller, qs.parse(props.join("&")));
+            // callback
+            b && b();
         }
     }
 };

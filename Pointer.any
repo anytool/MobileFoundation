@@ -28,9 +28,10 @@ module.exports  = function(a, b) {
             });
         // reload action
         } else {
+            console.log("[debug] reload class: ", id, workspace.tree[id].class, qs.parse(props.join("&")));
+            /*
             // get class
             var cls = workspace.tree[id].class;
-            console.log("[debug] reload class: ", cls, qs.parse(props.join("&")));
             // get instance
             var instance = workspace.tree[id].instance;
             // get parent id
@@ -44,6 +45,7 @@ module.exports  = function(a, b) {
             //new cls(instance.__caller, qs.parse(props.join("&")));
             // callback
             b && b();
+            */
         }
     }
 };

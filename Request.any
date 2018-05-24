@@ -5,6 +5,7 @@ var qs          = require("QueryString");
 var Network     = require(10019);
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
+    console.log("[debug] check reloaded id:", d.__id, (d.__caller || {}).__id);
     var g = {
         url     : d.__props.url || "",
         method  : {

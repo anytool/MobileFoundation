@@ -2,5 +2,5 @@ var workspace   = require("ANYWorkspace");
 var __rN        = require("ReactNative");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
-    
+    console.log("[debug] reload action: ", a.__props.rActId, a.__props.rProps);
 };

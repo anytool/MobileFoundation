@@ -51,6 +51,8 @@ module.exports  = function(a, b) {
                 var idx = (((workspace.tree[parentId] || {}).childs || {})[ids[i][0]] || []).indexOf(ids[i][1]);
                 // delete instance from parent
                 if (idx >= 0) workspace.tree[parentId].childs[ids[i][0]].splice(idx, 1);
+                // delete node
+                delete workspace.tree[ids[i][1]];
             }
             console.log("[debug] delete: ", ids);
 

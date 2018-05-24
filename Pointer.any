@@ -30,6 +30,7 @@ module.exports  = function(a, b) {
         } else {
             // get class
             var cls = workspace.tree[id].class;
+            console.log("[debug] reload class: ", cls);
             // get instance
             var instance = workspace.tree[id].instance;
             // get parent id
@@ -39,9 +40,8 @@ module.exports  = function(a, b) {
             // delete instance from parent
             if (idx >= 0) workspace.tree[parentId].childs[instance.__trigger].splice(idx, 1);
             // delete child nodes
-            console.log("[debug] reload: ", cls, workspace.tree[id].childs);
             // reload
-            new cls(instance.__caller, qs.parse(props.join("&")));
+            //new cls(instance.__caller, qs.parse(props.join("&")));
             // callback
             b && b();
         }

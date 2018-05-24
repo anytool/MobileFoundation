@@ -9,6 +9,7 @@ module.exports  = function(a, b) {
     if ((workspace.aliases[id] || []).length) {
         // get exactly id
         id = workspace.aliases[id][workspace.aliases[id].length - 1];
-        console.log("[debug] reload action: ", workspace.tree[id].class, props);
+        // get closest view
+        console.log("[debug] reload action: ", typeof workspace.tree[id].instance, workspace.tree[id].class, props);
     }
 };

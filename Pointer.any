@@ -10,12 +10,12 @@ module.exports  = function(a, b) {
         // get exactly id
         id = workspace.aliases[id][workspace.aliases[id].length - 1];
         // get closest view
-        var viewId = workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
+        var viewId = workspace.views[id] ? id : workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
         // reload view
         if (id == viewId) {
             // get view
             var view = workspace.views[viewId].doms.instances[workspace.views[viewId].doms.current];
-            console.log("[debug] reload view: ", typeof view, workspace.tree[id].class, props);
+            console.log("[debug] reload view: ", typeof view, props);
         // reload action
         } else {
             // get instance

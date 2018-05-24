@@ -9,12 +9,20 @@ module.exports  = function(a, b) {
     if ((workspace.aliases[id] || []).length) {
         // get exactly id
         id = workspace.aliases[id][workspace.aliases[id].length - 1];
-        // get instance
-        var instance = workspace.tree[id].instance;
-        // get caller of the instance
-        var caller = instance.__caller;
         // get closest view
-        var view = workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
-        console.log("[debug] reload action: ", typeof view, workspace.tree[id].class, props);
+        var viewId = workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
+        // reload view
+        if (id == viewId) {
+            // get view
+            var view = workspace.views[viewId].doms.instances[workspace.views[viewId].doms.current];
+            console.log("[debug] reload view: ", typeof view, workspace.tree[id].class, props);
+        // reload action
+        } else {
+            // get instance
+            var instance = workspace.tree[id].instance;
+            // get caller of the instance
+            var caller = instance.__caller;
+            console.log("[debug] reload action: ", workspace.tree[id].class, props);
+        }
     }
 };

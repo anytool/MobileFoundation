@@ -52,12 +52,26 @@ module.exports  = function(a, b) {
             for (var i in ids) {
                 // get parent id
                 var parentId = workspace.tree[ids[i][1]].paths.node[workspace.tree[ids[i][1]].paths.node.length - 1];
-                // get child index
-                var idx = (((workspace.tree[parentId] || {}).childs || {})[ids[i][0]] || []).indexOf(ids[i][1]);
-                // delete instance from parent
-                if (idx >= 0) workspace.tree[parentId].childs[ids[i][0]].splice(idx, 1);
-                // delete node
-                delete workspace.tree[ids[i][1]];
+                // parent node exists
+                if (parentId) {
+                    // get child index
+                    var idx = (((workspace.tree[parentId] || {}).childs || {})[ids[i][0]] || []).indexOf(ids[i][1]);
+                    // delete instance from parent
+                    if (idx >= 0) workspace.tree[parentId].childs[ids[i][0]].splice(idx, 1);
+                    // delete node
+                    delete workspace.tree[ids[i][1]];
+                }
+                // get parent id
+                parentId = workspace.views[ids[i][1]].parent;
+                // parent view exists
+                if (parentId) {
+                    // get child index
+                    var idx = ((workspace.views[parentId] || {}).childs || []).indexOf(ids[i][1]);
+                    // delete instance from parent
+                    if (idx >= 0) workspace.views[parentId].childs.splice(idx, 1);
+                    // delete node
+                    delete workspace.views[ids[i][1]];
+                }
             }
             console.log("[debug] delete: ", ids);
             // reload

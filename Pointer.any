@@ -18,6 +18,7 @@ module.exports  = function(a, b) {
         id = workspace.aliases[id][workspace.aliases[id].length - 1];
         // get closest view
         var viewId = workspace.views[id] ? id : workspace.tree[id].paths.view[workspace.tree[id].paths.view.length - 1];
+        console.log("[debug] reload class: ", id, viewId, workspace.tree[id].class, props);
         // reload view
         if (id == viewId) {
             // get view
@@ -29,7 +30,7 @@ module.exports  = function(a, b) {
             });
         // reload action
         } else {
-            console.log("[debug] reload class: ", id, workspace.tree[id].class, props);
+            
         }
     }
 };

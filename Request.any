@@ -19,6 +19,8 @@ module.exports  = function(d, t) {
             }[(d.__props.format||"querystring").toLowerCase()]
         }
     };
+    // process form data
+    console.log("[debug] form data: ", d.__props.formData);
     var responseHandler = function(status, body) {
         // save data
         d.data(d.__props.alias, body);

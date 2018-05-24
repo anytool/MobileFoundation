@@ -11,6 +11,7 @@ module.exports  = function(a, b) {
         prop[1] = a.data(prop[1]);
         props[i] = prop.join("=");
     }
+    props = props.length ? qs.parse(props.join("&")) : {};
     // node exists
     if ((workspace.aliases[id] || []).length) {
         // get exactly id
@@ -22,30 +23,13 @@ module.exports  = function(a, b) {
             // get view
             var view = workspace.views[viewId].doms.instances[workspace.views[viewId].doms.current];
             // update view
-            view.setState && view.setState(qs.parse(props.join("&")), function() {
+            view.setState && view.setState(props, function() {
                 this.active();
                 b && b();
             });
         // reload action
         } else {
-            console.log("[debug] reload class: ", id, workspace.tree[id].class, qs.parse(props.join("&")));
-            /*
-            // get class
-            var cls = workspace.tree[id].class;
-            // get instance
-            var instance = workspace.tree[id].instance;
-            // get parent id
-            var parentId = workspace.tree[id].paths.node[workspace.tree[id].paths.node.length - 1];
-            // get child index
-            var idx = (((workspace.tree[parentId] || {}).childs || {})[instance.__trigger] || []).indexOf(id);
-            // delete instance from parent
-            if (idx >= 0) workspace.tree[parentId].childs[instance.__trigger].splice(idx, 1);
-            // delete child nodes
-            // reload
-            //new cls(instance.__caller, qs.parse(props.join("&")));
-            // callback
-            b && b();
-            */
+            console.log("[debug] reload class: ", id, workspace.tree[id].class, props);
         }
     }
 };

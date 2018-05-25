@@ -13,15 +13,32 @@ module.exports  = function(d, t) {
             UPDATE  : "PUT",
             DELETE  : "DELETE"
         }[(d.__props.type||"GET").toUpperCase()],
-        headers : {
-            "Content-Type":{
-                json        : "application/json",
-                querystring : "application/x-www-form-urlencoded"
-            }[(d.__props.format||"querystring").toLowerCase()]
-        }
+        headers : null
+    }, vars = {
+        headers : "reqHds",
+        body    : "formData"
     };
-    // process form data
-    g.body = /^application\/json$/i.test(g.headers['Content-Type']) ? JSON.stringify(qs.parse(d.__props.formData)) : d.__props.formData;
+    // process variable
+    for (var type in vars) {
+        // process header data
+        g[type] = (a.__props[vars[type]] || "").split("&").filter(function(n){return n});
+        // process headers
+        for (var i in g[type]) {
+            var hd = g[type][i].split("=");
+            hd[1] = a.data(hd[1]);
+            g[type][i] = hd.join("=");
+        }
+        g[type] = g[type].join("&");
+    }
+    // convert headers to object
+    g.headers = qs.parse(g.headers);
+    // set required header data
+    g.headers["Content-Type"] = {
+        json        : "application/json",
+        querystring : "application/x-www-form-urlencoded"
+    }[(d.__props.format||"querystring").toLowerCase()];
+    // convert form data format to json format
+    if (/^application\/json$/i.test(g.headers['Content-Type'])) g.body = JSON.stringify(qs.parse(g.body));
     // setup response handler
     var responseHandler = function(status, body) {
         // save data

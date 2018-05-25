@@ -44,7 +44,7 @@ module.exports  = function(d, t) {
         // save data
         d.data(d.__props.alias, body);
         // get closest view
-        var view = d.dom();
+        var view = d.dom(true);
         // reload view
         view ? view.setState({}, function() {
             // callback

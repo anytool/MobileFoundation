@@ -52,7 +52,6 @@ module.exports  = function(d, t) {
         // callback directly
         }) : t[status] && t[status]();
     };
-    console.log("[debug] check request content:", g);
     // make request
     Network(g, {
         succeeded   : function(res) { responseHandler('succeeded', res) },

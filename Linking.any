@@ -4,11 +4,15 @@ var __rN        = require("ReactNative");
 module.exports  = function(a, b) {
     // read
     __rN.Linking.canOpenURL(a.__props.linkUrl).then(function(supported) {
-        // create
-        __rN.Linking.openURL(a.__props.linkUrl).catch(function(e) {
-            console.log('[debug] An error occurred:', e.message);
-        });
+        if (!supported) {
+            b && b(404);
+        } else {
+            // create
+            __rN.Linking.openURL(a.__props.linkUrl).catch(function(e) {
+                b && b(e.message);
+            });
+        }
     }).catch(function(e) {
-        console.log('[debug] An error occurred:', e.message);
+        b && b(e.message);
     });
 };

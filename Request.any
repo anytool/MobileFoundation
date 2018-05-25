@@ -21,11 +21,11 @@ module.exports  = function(d, t) {
     // process variable
     for (var type in vars) {
         // process header data
-        g[type] = (a.__props[vars[type]] || "").split("&").filter(function(n){return n});
+        g[type] = (d.__props[vars[type]] || "").split("&").filter(function(n){return n});
         // process headers
         for (var i in g[type]) {
             var hd = g[type][i].split("=");
-            hd[1] = a.data(hd[1]);
+            hd[1] = d.data(hd[1]);
             g[type][i] = hd.join("=");
         }
         g[type] = g[type].join("&");

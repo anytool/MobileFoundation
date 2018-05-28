@@ -1,7 +1,7 @@
 var workspace   = require("ANYWorkspace");
 var __rN        = require("ReactNative");
 var Base64      = require("Base64");
-var qs          = require("QueryString");
+var qs          = require("Qs");
 var Network     = require(10019);
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {

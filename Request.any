@@ -42,7 +42,7 @@ module.exports  = function(d, t) {
         user: d.data(d.__props.authU || ""),
         pass: d.data(d.__props.authP || "")
     };
-    if (auth.user || auth.pass) g.headers['Authorization'] = 'Basic ' + Base64.encode(auth.user + ':' + auth.pass);
+    if (auth.user || auth.pass) g.headers['Authorization'] = 'Basic ' + Base64(auth.user + ':' + auth.pass);
     // convert form data format to json format
     if (/^application\/json$/i.test(g.headers['Content-Type'])) g.body = JSON.stringify(qs.parse(g.body));
     console.log("[request] check request", g);

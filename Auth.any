@@ -1,0 +1,13 @@
+var workspace   = require("ANYWorkspace");
+var __rN        = require("ReactNative");
+var TouchID     = require("RNTouchId");
+/* a:instance, b:callbacks */
+module.exports  = function(a, b) {
+    TouchID.authenticate('Authentication')
+    .then(function(success) {
+        // Success code
+    })
+    .catch(function(error.message) {
+        b.failed && b.failed(error.message);
+    });
+};

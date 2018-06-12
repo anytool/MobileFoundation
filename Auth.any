@@ -1,5 +1,4 @@
 var workspace   = require("ANYWorkspace");
-var __rN        = require("ReactNative");
 var TouchID     = require("RNTouchId");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {

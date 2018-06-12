@@ -6,7 +6,7 @@ module.exports  = function(a, b) {
     .then(function(success) {
         // Success code
     })
-    .catch(function(error.message) {
+    .catch(function(error) {
         b.failed && b.failed(error.message);
     });
 };

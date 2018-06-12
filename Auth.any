@@ -2,7 +2,9 @@ var workspace   = require("ANYWorkspace");
 var TouchID     = require("RNTouchId");
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
-    TouchID.default.authenticate('Authentication')
+    TouchID.default.authenticate('Authentication', {
+        title: 'Authentication'
+    })
     .then(function(success) {
         // Success code
     })

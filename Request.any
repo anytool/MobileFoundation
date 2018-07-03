@@ -6,7 +6,7 @@ var Network     = require("Network");
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
     var g = {
-        url     : d.__props.url || "",
+        url     : d.data(d.__props.url || ""),
         method  : {
             READ    : "GET",
             CREATE  : "POST",

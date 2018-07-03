@@ -45,8 +45,14 @@ module.exports  = function(d, t) {
     if (auth.user || auth.pass) g.headers['Authorization'] = 'Basic ' + Base64.btoa(auth.user + ':' + auth.pass);
     // convert form data format to json format
     if (/^application\/json$/i.test(g.headers['Content-Type'])) g.body = JSON.stringify(qs.parse(g.body));
+
+
+    console.log(g);
+
+
     // setup response handler
     var responseHandler = function(status, body) {
+        console.log(body);
         // save data
         d.data(d.__props.alias, body);
         // get closest view

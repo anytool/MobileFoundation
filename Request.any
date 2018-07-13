@@ -6,7 +6,7 @@ var Network     = require("Network");
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
     var g = {
-        url     : d.__props.url || "",
+        url     : d.data(d.__props.url || ""),
         method  : {
             READ    : "GET",
             CREATE  : "POST",
@@ -24,9 +24,9 @@ module.exports  = function(d, t) {
         g[type] = (d.__props[vars[type]] || "").split("&").filter(function(n){return n});
         // process headers
         for (var i in g[type]) {
-            var hd = g[type][i].split("=");
-            hd[1] = d.data(hd[1]);
-            g[type][i] = hd.join("=");
+            var hd      = g[type][i].split("=");
+            hd[1]       = d.data(hd[1]);
+            g[type][i]  = hd.join("=");
         }
         g[type] = g[type].join("&");
     }
@@ -58,6 +58,7 @@ module.exports  = function(d, t) {
         // callback directly
         }) : t[status] && t[status]();
     };
+    __rN.AlertIOS.alert('', JSON.stringify(g));
     g.object = d;
     // make request
     Network(g, {

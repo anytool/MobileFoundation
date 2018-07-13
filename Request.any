@@ -5,7 +5,6 @@ var qs          = require("Qs");
 var Network     = require("Network");
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
-    __rN.AlertIOS.alert('', d.__props.url);
     var g = {
         url     : d.data(d.__props.url || ""),
         method  : {

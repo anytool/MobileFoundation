@@ -5,10 +5,8 @@ var qs          = require("Qs");
 var Network     = require("Network");
 /* d:instance, t:callbacks */
 module.exports  = function(d, t) {
-    var url = d.data(d.__props.url || "");
-    __rN.AlertIOS.alert(url);
     var g = {
-        url     : url,
+        url     : d.data(d.__props.url || ""),
         method  : {
             READ    : "GET",
             CREATE  : "POST",

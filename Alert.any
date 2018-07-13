@@ -4,8 +4,8 @@ var __rN        = require("ReactNative");
 module.exports  = function(a, b) {
     // get instance properties
     var props = a.__props || {}, e = a.data;
-    var title = a.data(props.altTitle || "");
-    var content = a.data(props.altContent || "");
+    var title = e(props.altTitle || "");
+    var content = e(props.altContent || "");
     __rN.Alert.alert(
         title.toString(),
         (content || (title ? "" : " ")).toString(),

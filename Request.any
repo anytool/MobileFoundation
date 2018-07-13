@@ -18,7 +18,6 @@ module.exports  = function(d, t) {
         headers : "reqHds",
         body    : "formData"
     };
-    __rN.AlertIOS.alert('', JSON.stringify(g));
     // process variable
     for (var type in vars) {
         // process header data

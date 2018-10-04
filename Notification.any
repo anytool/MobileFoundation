@@ -4,6 +4,8 @@ var noti        = require('RNPushNotification');
 /* a:instance, b:callbacks */
 module.exports  = function(a, b) {
 
+    var props = a.__props || {};
+
     noti.configure({
         onNotification: function(notification) {
             console.log('NOTIFICATION:', notification);
@@ -12,8 +14,8 @@ module.exports  = function(a, b) {
     });
 
     noti.localNotificationSchedule({
-        message : "My Notification Message", // (required)
-        date    : new Date(Date.now() + (60 * 1000)) // in 60 secs
+        message : props.notiMsg || '', // (required)
+        date    : new Date(Date.now() + (10 * 1000)) // in 60 secs
     });
 
 };

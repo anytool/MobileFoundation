@@ -1,0 +1,19 @@
+var workspace   = require("ANYWorkspace");
+var __rN        = require("ReactNative");
+var noti        = require('RNPushNotification');
+/* a:instance, b:callbacks */
+module.exports  = function(a, b) {
+
+    noti.configure({
+        onNotification: function(notification) {
+            console.log('NOTIFICATION:', notification);
+            notification.finish(__rN.PushNotificationIOS.FetchResult.NoData);
+        }
+    });
+
+    noti.localNotificationSchedule({
+        message : "My Notification Message", // (required)
+        date    : new Date(Date.now() + (60 * 1000)) // in 60 secs
+    });
+
+};
